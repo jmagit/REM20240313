@@ -1,8 +1,8 @@
 const nombre = 'mundo';
 acoplado = 'Valor ejemplo'
-function kk() {
-    return 'definida en ejemplo1.js'
-}
+// const kk = function() {
+//     return 'definida en ejemplo1.js'
+// }
 
 var message = 'Hola ' + nombre + 
   ' continuo en otra linea'
