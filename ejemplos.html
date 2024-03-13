@@ -1,27 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejemplos</title>
 </head>
+
 <body>
     <output id="header"></output>
     <script src="./src/ejemplos2.js"></script>
     <script src="./src/ejemplos.js"></script>
     <script>
-        (function() {
+        (function () {
             var cotilla = globalThis;
             acoplado = 'kk'
             console.log(`Valor: ${acoplado} ${kk()}`)
             var t = [10, 20, 30]
-            t[5] = 50;
+            t[5] = kk;
+            t.push(60)
             // t = {x: 10, y: 20}
-            for(let i in t) {
+            for (let i = 0; i < t.length; i++) {
                 console.log(`${i}: ${t[i]}`)
             }
+            t.splice(1, 1)
+            for (let i in t) {
+                console.log(`${i}: ${t[i]}`)
+            }
+            t = new Object() // {} {x: 10, y: 20}
+            t.x = 11
+            t.z = 30
+            t['o'] = 'algo'
+            t.metodo = (a, b) => a + b
+            t.metodo = 4
+            for (let i in t) {
+                console.log(`${i}: ${t[i]}`)
+            }
+            delete t.metodo
+            for (let i in t) {
+                console.log(`${i}: ${t[i]}`)
+            }
+
+            class MiPunto {
+                #delta = 1
+                constructor(x, y) {
+                    this.x = x
+                    this.y = y                    
+                }
+                suma() {
+                    return (this.x + this.y) * delta
+                }
+                nombre() {
+                    return 'Creado con una clase'
+                }
+                get delta() { return this.#delta }
+                set delta(value) {
+                    if(this.#delta === value) return;
+                    if(value < 0)
+                        throw new Error('Tiene que ser positivo')
+                    this.#delta = value
+
+                }
+            }
+
+            function Coordenada(x, y) {
+                let delta = 2
+                let obj = this;
+                this.x = x
+                obj.y = y
+                this.suma = () => (this.x + obj.y) * delta
+                this.set = valor => { delta = valor }
+            }
+            Coordenada.prototype.nombre = () => 'Soy un punto'
+            let p1 = new MiPunto(10, 20)
+            p1.z = 30
+            p1.suma = () => 0
+            p1.delta = 10
+            // p1.#delta = -10
+            if(p1.delta === 1) {
+                
+            }
+            let p2 = new Coordenada(20, 10)
+            // let p3 = p2.prototype;
+            p2.set(10)
+            p2.delta = 4
+            Coordenada.prototype.nombre = () => 'Es local'
+            console.log(p1, p1.suma(), p2, p2.suma(),
+                p1.nombre(), p2.nombre())
+            console.log(typeof (MiPunto), typeof (Coordenada))
         })()
         // debugger;
     </script>
 </body>
+
 </html>
