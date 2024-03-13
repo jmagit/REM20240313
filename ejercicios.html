@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios</title>
+</head>
+
+<body>
+    <script src="./src/ejercicios.js"></script>
+    <script>
+        // console.log(aleatorio(1, 100), aleatorio(1, 100), aleatorio(1, 100), )
+        // console.log(creaArray(10), creaArray(5, ''))
+        let juego = new Juego()
+        console.log(juego.objetivo)
+        while (true) {
+            let numero = prompt(`Dame un número [${11 - juego.intentos} de 10]: `)
+            if(!numero) break;
+            juego.juega(numero)
+            alert(juego.mensaje)
+            if (juego.terminado ||juego.intentos === 0 ) {
+                if (juego.intentos === 0)
+                    alert(`El numero buscado era el ${juego.objetivo}`)
+                break;
+            }
+        }
+    </script>
+</body>
+
+</html>
