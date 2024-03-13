@@ -104,6 +104,24 @@
         console.log(mod.comun())
         console.log(comun())
         console.log(comun2())
+        function suma(a, b) { return a + b }
+        function sumaP({x, y}) { return x + y }
+        let t = [10, 20, 30, 40]
+        let [a, b, ...resto] = t
+        console.log(a, b, resto)
+        let punto = { x: 1, y: 2 }
+        let {x, y} = punto
+        // t = [...'Hola']
+        let o = { ...punto, z: 30}
+        console.log(`x: ${x} y: ${y} suma: ${suma(...t)} ${sumaP(punto)}`,
+         t, o)
+        let r ={ algo: {x: 'la x'}} //0 // = {} //{ algo: {x: 'la x'}}
+        // if(r && r.algo && r?.algo?.x)
+        let s = r || 'algo' // r ?? 'algo'
+        s = r && r.algo
+        console.log(r?.algo?.x.toLocaleUpperCase(), s)
+        s = prompt("Pide")
+        alert(s)
     </script>
 </body>
 
