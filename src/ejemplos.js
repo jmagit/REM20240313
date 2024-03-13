@@ -1,5 +1,10 @@
 const nombre = 'mundo';
-let message = 'Hola ' + nombre + 
+acoplado = 'Valor ejemplo'
+function kk() {
+    return 'definida en ejemplo1.js'
+}
+
+var message = 'Hola ' + nombre + 
   ' continuo en otra linea'
 let a = 2, b = 2
 message = `Hola ${nombre} sigo salto a otra ${a + b.toString()} ${a * b}`
@@ -16,7 +21,7 @@ if(message) {
 } else
     console.log('No es boolean')
 // Log to console
-message = a = b = 'c4'
+messaje = a = b = 'c4'
 console.log(message)
 a = 1;
 a += 2; // a = a + 2
