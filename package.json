@@ -1,0 +1,14 @@
+{
+  "name": "rem20240313",
+  "version": "1.0.0",
+  "description": "- [Git](https://git-scm.com/)\r - [NVM for Windows](https://github.com/coreybutler/nvm-windows/releases)\r - [Node.js LTS](https://nodejs.org)\r - [Visual Studio Code](http://code.visualstudio.com/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}
