@@ -9,6 +9,7 @@
 
 <body>
     <output id="header"></output>
+    <!--
     <script src="./src/ejemplos2.js"></script>
     <script src="./src/ejemplos.js"></script>
     <script>
@@ -90,6 +91,19 @@
             console.log(typeof (MiPunto), typeof (Coordenada))
         })()
         // debugger;
+    </script>
+    -->
+    <script type="module">
+        // import {fnMod1, comun} from './src/index.js'
+        // import {fnMod2, comun as comun2} from './src/index.js'
+        import {fnMod1, comun, fnMod2, comun2} from './src/index.js'
+        import * as mod from './src/index.js'
+        fnMod1()
+        fnMod2()
+        mod.fnMod2()
+        console.log(mod.comun())
+        console.log(comun())
+        console.log(comun2())
     </script>
 </body>
 
