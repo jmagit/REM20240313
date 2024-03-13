@@ -18,3 +18,11 @@ if(message) {
 // Log to console
 message = a = b = 'c4'
 console.log(message)
+a = 1;
+a += 2; // a = a + 2
+a = '2'; b = '2'
+if(a === b) {
+    console.log('Iguales')
+} else {
+    console.log('No son idénticos')
+}
