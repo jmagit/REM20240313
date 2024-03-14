@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+
+<body>
+    <header>
+        cabecera
+    </header>
+    <nav id="botonera">
+
+    </nav>
+    <main>
+
+    </main>
+    <footer>
+        <hr>
+        &copy; 2024
+    </footer>
+    <script>
+        const pidePagina = ev => load(+ev.target.textContent - 1)
+        for(let i=0; i < 20; i++) {
+            let btn = document.createElement('button')
+            btn.textContent = i + 1;
+            btn.addEventListener('click', pidePagina)
+            botonera.appendChild(btn)
+        }
+        function load(pagina = 1, filas = 20) {
+            fetch(`https://picsum.photos/v2/list?page=${pagina}&limit=${filas}`)
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    let ul = document.createElement('ul')
+                    data.forEach(item => {
+                        let li = document.createElement('li')
+                        li.innerHTML = `<a href="${item.download_url}" target="_blank" alt="Foto ${item.id} de ${item.author}">${item.author} (${item.id})</a>`
+                        ul.appendChild(li)
+                    });
+                    document.querySelector('main').textContent = null;
+                    document.querySelector('main').appendChild(ul)
+                })
+        }
+        load(1)
+// {
+// "id": "0",
+// "author": "Alejandro Escamilla",
+// "width": 5616,
+// "height": 3744,
+// "url": "https://unsplash.com/...",
+// "download_url": "https://picsum.photos/..."
+// }
+    </script>
+</body>
+
+</html>
