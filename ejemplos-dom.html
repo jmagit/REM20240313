@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body>
+    <h1>Titulo</h1>
+    <p class="estilo">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet aperiam eum inventore possimus, unde incidunt
+        distinctio quo quisquam perferendis asperiores rerum reiciendis aut cum quasi provident accusantium? Quibusdam,
+        nemo eos!
+    </p>
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" name="nombre" type="text" value="mundo">
+    </div>
+    <output id="resultado"></output>
+    <div id="botonera">
+        <input type="button" value="saluda" >
+        <input type="button" value="despide" >
+    </div> 
+
+    <script>
+        try {
+        // let titulo = document.getElementsByTagName('h1')
+        let titulo = document.querySelectorAll('h2')
+        titulo[0].textContent = 'Dinámico'
+        } catch (error) {
+            console.error('No encuentro el título')
+        }
+        // let parrafo = document.getElementsByClassName('estilo')
+        let parrafo = document.querySelectorAll('.estilo')
+        parrafo[0].innerHTML = 'Lorem <b>ipsum</b> dolor'
+        // let rslt = document.getElementById('resultado')
+        parrafo[0].hidden = true
+        let rslt = document.querySelector('#resultado')
+        rslt.textContent = '444'
+        const saluda = ev => {
+            rslt.textContent = `Hola ${nombre.value}`
+        }
+        const cotilla = ev => {
+            console.log('evento en ', ev)
+        }
+        let btnSaluda = document.querySelector('input[value=saluda]')
+        btnSaluda.addEventListener('click', saluda)
+        // btnSaluda.addEventListener('click', cotilla)
+        let btnDespide = document.querySelector('input[value=despide]')
+        btnDespide.focus()
+        btnDespide.addEventListener('click', ev => {
+            rslt.textContent = `Adios ${nombre.value}`
+            // btnSaluda.removeEventListener('click', cotilla)
+        })
+        botonera.addEventListener('click', cotilla)
+        nombre.onblur = saluda
+        // nombre.onblur = cotilla
+    </script>
+</body> 
+</html>
