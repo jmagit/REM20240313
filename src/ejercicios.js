@@ -40,6 +40,7 @@ function damePrimos(num) {
     return rslt;
 }
 
+// eslint-disable-next-line no-unused-vars
 function esNIF(nif) {
     if (!/^\d{1,8}[A-Za-z]$/.test(nif))
         return false;
@@ -48,6 +49,7 @@ function esNIF(nif) {
     return letterValue.toUpperCase() === 'TRWAGMYFPDXBNJZSQVHLCKE'.charAt(numberValue % 23);
 }
 
+// eslint-disable-next-line no-unused-vars
 function esPalindromo(cadena) {
     if (typeof (cadena) != "string" || cadena.trim().length == 0) return false;
     cadena = cadena.replace(/[ .,;:#¿?¡!()[\]{}=+\-*/_`~$%^&'"]/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase();
