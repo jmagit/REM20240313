@@ -9,6 +9,10 @@
         .error {
             color: red;
         }
+
+        input:invalid {
+            border: 2px solid red;
+        }
     </style>
 </head>
 
@@ -22,7 +26,7 @@
         </div>
         <div>
             <label for="nombre">nombre:</label>
-            <input id="nombre" name="nombre" type="text" value="mundo" required minlength="2" maxlength="10">
+            <input id="nombre" name="nombre" type="text" value="m" required minlength="2" maxlength="10">
         </div>
         <div>
             <label for="apellidos">apellidos:</label>
@@ -63,9 +67,9 @@
     <script src="./src/ejercicios.js"></script>
     <script>
         document.getElementsByName('nif')[0].addEventListener('change', ev => {
-            if (ev.target.value === '' || esNIF(ev.target.value))
+            if (ev.target.value === '' || esNIF(ev.target.value)) {
                 ev.target.setCustomValidity('')
-            else
+            } else
                 ev.target.setCustomValidity('No es un NIF valido')
             nifError.textContent = ev.target.validationMessage
         })
