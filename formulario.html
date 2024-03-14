@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Formulario</h1>
+    <div id="sumario"></div>
+    <form id="miForm" method="get" novalidate>
+        <div>
+            <label for="id">código:</label>
+            <input id="id" data-label="código" name="id" type="number" value="1" required min="1">
+        </div>
+        <div>
+            <label for="nombre">nombre:</label>
+            <input id="nombre" name="nombre" type="text" value="mundo" required minlength="2" maxlength="10">
+        </div>
+        <div>
+            <label for="apellidos">apellidos:</label>
+            <input id="apellidos" name="apellidos" type="text" minlength="2" maxlength="10">
+        </div>
+        <div>
+            <label for="edad">edad:</label>
+            <input id="edad" name="edad" type="number" min="16" max="67">
+        </div>
+        <div>
+            <label for="correo">correo:</label>
+            <input id="correo" name="correo" type="email">
+        </div>
+        <div>
+            <label for="fecha">fecha:</label>
+            <input id="fecha" name="fecha" type="date">
+        </div>
+        <div>
+            <label for="nif">nif:</label>
+            <input id="nif" name="nif" type="text" pattern="^\d{1,8}[A-Za-z]$">
+            <output class="error" id="nifError"></output>
+        </div>
+        <div>
+            <input id="conflictivo" name="conflictivo" type="checkbox" value="on" checked>
+            <label for="conflictivo">conflictivo</label>
+        </div>
+        <div>
+            <label for="detalle">detalle:</label>
+            <textarea id="detalle" name="detalle"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="enviar">
+            <input type="reset" value="limpiar">
+            <input type="button" value="volver">
+        </div>
+
+    </form>
+    <script src="./src/ejercicios.js"></script>
+    <script>
+        document.getElementsByName('nif')[0].addEventListener('change', ev => {
+            if (ev.target.value === '' || esNIF(ev.target.value))
+                ev.target.setCustomValidity('')
+            else
+                ev.target.setCustomValidity('No es un NIF valido')
+            nifError.textContent = ev.target.validationMessage
+        })
+        document.forms[0].addEventListener('submit', function (ev) {
+            if (document.forms[0].checkValidity()) {
+                document.querySelector('#sumario').textContent = '';
+                document.forms[0].submit();
+            } else {
+                let msg = '';
+                for (let item of document.forms[0].elements) {
+                    if (!item.checkValidity()) msg += `<li class="error">${item.dataset.label ?? item.name}: ${item.validationMessage}</li>`;
+                }
+                document.querySelector('#sumario').innerHTML = `<h3>Sumario de errores</h3><ul>${msg}</ul>`;
+                ev.preventDefault()
+            }
+        });
+    </script>
+</body>
+
+</html>
