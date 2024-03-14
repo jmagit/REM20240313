@@ -39,8 +39,10 @@
     <script>
         try {
             // let titulo = document.getElementsByTagName('h1')
-            let titulo = document.querySelectorAll('h2')
-            titulo[0].textContent = 'Dinámico'
+            if (localStorage?.saludo) {
+                let titulo = document.querySelectorAll('h1')
+                titulo[0].textContent = localStorage.saludo
+            }
         } catch (error) {
             console.error('No encuentro el título')
         }
@@ -52,7 +54,12 @@
         let rslt = document.querySelector('#resultado')
         rslt.textContent = '444'
         const saluda = ev => {
-            rslt.textContent = `Hola ${nombre.value}`
+            const cad = `Hola ${nombre.value}`
+            rslt.textContent = cad
+            if (localStorage) {
+                localStorage.saludo = cad
+                localStorage.datos = JSON.stringify(data)
+            }
             ev.stopPropagation()
         }
         const cotilla = ev => {
@@ -65,6 +72,8 @@
         btnDespide.focus()
         btnDespide.addEventListener('click', ev => {
             rslt.textContent = `Adios ${nombre.value}`
+            if (localStorage?.saludo)
+                localStorage.removeItem('saludo')
             btnSaluda.removeEventListener('click', cotilla)
         })
         botonera.addEventListener('click', cotilla)
@@ -91,7 +100,7 @@
         btnSaluda.addEventListener('click', comun)
         btnDespide.addEventListener('click', comun)
 
-        let data =  ['reconocer', 'La ruta nos aporto otro paso natural', 'SOMOS O NO SOMOS',
+        let data = ['reconocer', 'La ruta nos aporto otro paso natural', 'SOMOS O NO SOMOS',
             'Dábale arroz a la zorra el abad', 'Este no lo es',
             'No subas, abusón', '¿Será lodo o dólares?', 'vacio'
         ]
