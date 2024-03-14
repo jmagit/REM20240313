@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM</title>
+    <style>
+        .micolor {
+            color: blue;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Titulo</h1>
-    <p class="estilo">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet aperiam eum inventore possimus, unde incidunt
+    <p class="estilo">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet aperiam eum inventore possimus,
+        unde incidunt
         distinctio quo quisquam perferendis asperiores rerum reiciendis aut cum quasi provident accusantium? Quibusdam,
         nemo eos!
     </p>
@@ -18,16 +24,23 @@
         <input id="nombre" name="nombre" type="text" value="mundo">
     </div>
     <output id="resultado"></output>
+    <div>
+        <output id="otroresultado"></output>
+    </div>
     <div id="botonera">
-        <input type="button" value="saluda" >
-        <input type="button" value="despide" >
-    </div> 
+        <input type="button" value="saluda" data-msg="Hola">
+        <input type="button" value="despide" data-msg="Adioooooos">
+        <input type="button" value="conecta">
+        <input type="button" value="cargar">
+    </div>
+    <div id="listado">
 
+    </div>
     <script>
         try {
-        // let titulo = document.getElementsByTagName('h1')
-        let titulo = document.querySelectorAll('h2')
-        titulo[0].textContent = 'Dinámico'
+            // let titulo = document.getElementsByTagName('h1')
+            let titulo = document.querySelectorAll('h2')
+            titulo[0].textContent = 'Dinámico'
         } catch (error) {
             console.error('No encuentro el título')
         }
@@ -40,6 +53,7 @@
         rslt.textContent = '444'
         const saluda = ev => {
             rslt.textContent = `Hola ${nombre.value}`
+            ev.stopPropagation()
         }
         const cotilla = ev => {
             console.log('evento en ', ev)
@@ -51,11 +65,48 @@
         btnDespide.focus()
         btnDespide.addEventListener('click', ev => {
             rslt.textContent = `Adios ${nombre.value}`
-            // btnSaluda.removeEventListener('click', cotilla)
+            btnSaluda.removeEventListener('click', cotilla)
         })
         botonera.addEventListener('click', cotilla)
         nombre.onblur = saluda
         // nombre.onblur = cotilla
+        let btnConecta = document.querySelector('input[value=conecta]')
+        const conectar = () => {
+            alert("Me he conectado")
+            btnConecta.value = 'desconetar'
+            btnConecta.removeEventListener('click', conectar)
+            btnConecta.addEventListener('click', desconectar)
+        }
+        const desconectar = () => {
+            alert("Desconectado")
+            btnConecta.value = 'conetar'
+            btnConecta.removeEventListener('click', desconectar)
+            btnConecta.addEventListener('click', conectar)
+        }
+        btnConecta.addEventListener('click', conectar)
+        let otrorslt = document.querySelector('#otroresultado')
+        const comun = ev => {
+            otrorslt.textContent = `${ev.target.dataset.msg} ${nombre.value}`
+        }
+        btnSaluda.addEventListener('click', comun)
+        btnDespide.addEventListener('click', comun)
+
+        let data =  ['reconocer', 'La ruta nos aporto otro paso natural', 'SOMOS O NO SOMOS',
+            'Dábale arroz a la zorra el abad', 'Este no lo es',
+            'No subas, abusón', '¿Será lodo o dólares?', 'vacio'
+        ]
+        let btnCargar = document.querySelector('input[value=cargar]')
+        btnCargar.addEventListener('click', () => {
+            let ul = document.createElement('ul')
+            data.forEach(item => {
+                let li = document.createElement('li')
+                li.setAttribute('class', 'micolor')
+                li.textContent = item
+                ul.appendChild(li)
+            });
+            document.querySelector('#listado').appendChild(ul)
+        });
     </script>
-</body> 
+</body>
+
 </html>
